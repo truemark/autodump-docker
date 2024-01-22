@@ -1,6 +1,5 @@
-FROM truemark/aws-cli:amazonlinux-2023 AS base
+FROM  truemark/aws-cli:amazonlinux-2023 AS base
 COPY --from=truemark/git:amazonlinux-2023 /usr/local/ /usr/local/
-#COPY --from=truemark/git-crypt:amazonlinux-2023 /usr/local/ /usr/local/
 COPY --from=truemark/node:18-amazonlinux-2023 /usr/local /usr/local/
 RUN npm install -g typescript aws-cdk pnpm yarn esbuild && \
     npm config set fund false --location=global
@@ -8,8 +7,13 @@ RUN npm install -g typescript aws-cdk pnpm yarn esbuild && \
 FROM base AS pgdump
 RUN yum update && \
     yum install -y postgresql15 && \
-    yum clean all
+    yum clean all && \
+    mkdir -p /app  && \
+    chmod 777 /app
 
-#ENTRYPOINT ["tail"]
-ENTRYPOINT [ "app/dumpdb.sh" ]
-#CMD ["-f","/dev/null"]
+WORKDIR /app
+COPY --chmod=0755 . /app
+#RUN chmod +x dumpdb.sh
+
+ENTRYPOINT [ "/app/dumpdb.sh" ]
+#ENTRYPOINT [ "tail", "-f", "/dev/null" ]

@@ -5,8 +5,7 @@ set -x
 export PATH=/usr/local/bin:/usr/bin
 
 usage() {
-    echo ""
-    echo "Usage: dumpdb.sh"
+    echo "Usage: ./dumpdb.sh"
     echo "SECRET_ARN must be set in the environment variables."
 }
 
