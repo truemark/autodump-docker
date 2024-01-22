@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build . -t autodump -f amazonlinux.Dockerfile
+docker build . -t autodump
