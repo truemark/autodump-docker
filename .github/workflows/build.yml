@@ -40,14 +40,14 @@ jobs:
           run: |
             PREFIX="beta-"
             echo "PREFIX=$PREFIX" >> $GITHUB_OUTPUT
-            ROOT_PREFIX="beta"
+            ROOT_PREFIX="beta-"
             echo "ROOT_PREFIX=$ROOT_PREFIX" >> $GITHUB_OUTPUT
   build:
     needs: [prepare]
     uses: ./.github/workflows/docker-buildx.yml
     with:
       dockerfile: "Dockerfile"
-      images: "truemark/autodump:${{ needs.prepare.outputs.PREFIX }}-${{github.run_number}},truemark/autodump:${{ needs.prepare.outputs.PREFIX }},truemark/aws-cdk:${{ needs.prepare.outputs.ROOT_PREFIX }}"
+      images: "truemark/autodump:${{ needs.prepare.outputs.PREFIX }}${{github.run_number}},truemark/aws-cdk:${{ needs.prepare.outputs.ROOT_PREFIX }}"
       copy_to_ecr_prefix: "public.ecr.aws/truemark"
       target: base
       security_group_id: ${{ vars.SECURITY_GROUP_ID }}
