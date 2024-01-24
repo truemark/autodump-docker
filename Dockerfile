@@ -6,7 +6,7 @@
 #
 #FROM base AS pgdump
 
-FROM amazonlinux:2023
+FROM amazonlinux:2023 as base
 
 RUN yum update -y && \
     yum install -y postgresql15 jq && \
