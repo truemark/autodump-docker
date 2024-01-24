@@ -1,16 +1,15 @@
-# AutoDump docker image
-The intent of this docker image is to provide a simple way to run the pg_dump command on a postgres database. 
+# AutoDump Docker Image
 
-## Maintainers
+[![GitHub Actions][github-image]][github-url]
 
- - [erikrj](https://github.com/erikrj)
+This repository hosts the automation to build the docker image used by the AutoDump automation.
 
-## License
-
-The contents of this repository are under the BSD 3-Clause license. See the
-license [here](https://github.com/truemark/aws-cdk-docker/blob/main/LICENSE.txt).
+See [AutoDump](https://github.com/truemark/autodump)
 
 ## Reference
 because no one can remember everything.
 
 How to keep a docker container running for debugging. [link](https://stackoverflow.com/questions/30209776/docker-container-will-automatically-stop-after-docker-run-d)
+
+[github-url]: https://github.com/truemark/autodumo-docker/actions
+[github-image]: https://github.com/truemark/autodumo-docker/workflows/release/badge.svg

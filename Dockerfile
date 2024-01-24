@@ -6,10 +6,10 @@
 #
 #FROM base AS pgdump
 
-FROM --platform=linux/amd64 amazonlinux:2
+FROM amazonlinux:2023
 
 RUN yum update -y && \
-    yum install -y postgresql jq && \
+    yum install -y postgresql15 jq && \
     yum install -y aws-cli && \
     yum clean all && \
     mkdir -p /app
