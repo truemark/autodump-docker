@@ -40,7 +40,7 @@ jobs:
           run: |
             PREFIX="beta-"
             echo "PREFIX=$PREFIX" >> $GITHUB_OUTPUT
-            ROOT_PREFIX="beta-"
+            ROOT_PREFIX="beta"
             echo "ROOT_PREFIX=$ROOT_PREFIX" >> $GITHUB_OUTPUT
   build:
     needs: [prepare]
