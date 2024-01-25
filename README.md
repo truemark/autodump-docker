@@ -6,10 +6,19 @@ This repository hosts the automation to build the docker image used by the AutoD
 
 See [AutoDump](https://github.com/truemark/autodump)
 
+The image generated has the following PostgreSQL clients installed:
+
+ - /usr/lib/postgresql/10/bin/psql
+ - /usr/lib/postgresql/15/bin/psql
+ - /usr/lib/postgresql/11/bin/psql
+ - /usr/lib/postgresql/12/bin/psql
+ - /usr/lib/postgresql/14/bin/psql
+ - /usr/lib/postgresql/16/bin/psql
+ - /usr/lib/postgresql/13/bin/psql
+
+The latest version is what is linked to /usr/local/bin/psql
+
 ## Reference
-because no one can remember everything.
 
-How to keep a docker container running for debugging. [link](https://stackoverflow.com/questions/30209776/docker-container-will-automatically-stop-after-docker-run-d)
-
-[github-url]: https://github.com/truemark/autodumo-docker/actions
-[github-image]: https://github.com/truemark/autodumo-docker/workflows/release/badge.svg
+[github-url]: https://github.com/truemark/autodump-docker/actions
+[github-image]: https://github.com/truemark/autodump-docker/workflows/release/badge.svg

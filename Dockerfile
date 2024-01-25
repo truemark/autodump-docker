@@ -1,23 +1,13 @@
-#FROM  truemark/aws-cli:amazonlinux-2023 AS base
-#COPY --from=truemark/git:amazonlinux-2023 /usr/local/ /usr/local/
-#COPY --from=truemark/node:18-amazonlinux-2023 /usr/local /usr/local/
-#RUN npm install -g typescript aws-cdk pnpm yarn esbuild && \
-#    npm config set fund false --location=global
-#
-#FROM base AS pgdump
+FROM debian:bookworm as base
+ENV DEBIAN_FRONTEND="noninteractive" \
+  APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=true
 
-FROM amazonlinux:2023 as base
+RUN apt-get -qq update &&  apt-get -qq --no-install-recommends install curl gnupg ca-certificates && \
+  sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt bookworm-pgdg main" > /etc/apt/sources.list.d/pgdg.list' && \
+  curl -sSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && \
+  apt-get -qq update && apt-get -qq --no-install-recommends install postgresql-client-10 postgresql-client-11 postgresql-client-12 postgresql-client-13 postgresql-client-14 postgresql-client-15 postgresql-client-16 && \
+  apt-get -qq clean autoclean && apt-get -qq autoremove && rm -rf /var/lib/apt/lists/*
 
-RUN yum update -y && \
-    yum install -y postgresql15 jq && \
-    yum install -y aws-cli && \
-    yum clean all && \
-    mkdir -p /app
+COPY /dumpdb.sh /usr/local/bin/dumpdb.sh
 
-WORKDIR /app
-COPY --chmod=0755 . /app
-RUN chmod +x dumpdb.sh
-
-ENTRYPOINT [ "/app/dumpdb.sh" ]
-#CMD [ "date" ]
-#ENTRYPOINT [ "tail", "-f", "/dev/null" ]
+ENTRYPOINT [ "/user/local/bin/dumpdb.sh" ]
