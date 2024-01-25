@@ -17,4 +17,4 @@ RUN apt-get -qq update &&  apt-get -qq --no-install-recommends install curl gnup
 
 COPY /dumpdb.sh /usr/local/bin/dumpdb.sh
 
-ENTRYPOINT [ "/user/local/bin/dumpdb.sh" ]
+ENTRYPOINT [ "/usr/local/bin/dumpdb.sh" ]
