@@ -45,6 +45,9 @@ fi
 
 echo "starting copy to s3 $(date -u)"
 
+echo "file system info"
+echo "$(ls -al | grep *.dmp)"
+
 aws s3 cp $FILE_NAME "s3://${BUCKET_NAME}/${FILE_NAME}"
 if [[ $? -eq 0 ]]
 then
