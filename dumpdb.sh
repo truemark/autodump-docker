@@ -1,6 +1,5 @@
 #!/bin/bash
-#set -x
-
+set -x
 
 export PATH=/usr/local/bin:/usr/bin
 
@@ -48,10 +47,11 @@ echo "starting copy to s3 $(date -u)"
 echo "file system info"
 echo "$(ls -al | grep *.dmp)"
 
-aws s3 cp $FILE_NAME "s3://${BUCKET_NAME}/${FILE_NAME}"
+aws s3 cp $FILE_NAME "s3://${BUCKET_NAME}/"
 if [[ $? -eq 0 ]]
 then
   echo "successfully completed copy to s3 $(date -u)"
 else
   echo "there was a problem with copy, result is $?"
+  exit 1
 fi
