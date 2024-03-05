@@ -9,7 +9,6 @@ usage() {
 }
 
 export SECRET_ARN=${SECRET_ARN:?'environment variable is required'}
-export FILE_NAME=$(date "+%Y-%m-%d-%H-%M").dmp
 
 # Access the secret, retrieve the secret string
 returnval=$(aws secretsmanager get-secret-value --secret-id ${SECRET_ARN} --output text --query 'SecretString')
@@ -26,6 +25,7 @@ then
         export PGDATABASE=$(echo ${returnval} | jq -r '.databasename')
 
         echo -e "starting dump $(date -u)\n"
+        export FILE_NAME=${PGDATABASE}-$(date "+%Y-%m-%d-%H-%M").dmp
         pg_dump -Fc  -O -Z 9 -f $FILE_NAME -d $PGDATABASE -U $PGUSER -h $PGHOST
 
 
