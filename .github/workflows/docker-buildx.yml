@@ -83,7 +83,7 @@ jobs:
           username: ${{ secrets.docker_hub_username }}
           password: ${{ secrets.docker_hub_password }}
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: "${{ secrets.aws_assume_role }}"
           aws-region: "us-east-1"
@@ -109,7 +109,7 @@ jobs:
           username: ${{ secrets.docker_hub_username }}
           password: ${{ secrets.docker_hub_password }}
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: "${{ secrets.aws_assume_role }}"
           aws-region: "us-east-1"
